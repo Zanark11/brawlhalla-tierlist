@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brawlhalla Tier List</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <header>
+        <div class="logo">BRAWLHALLA <span>TIER LIST</span></div>
+
+        <nav>
+            <a href="/">Accueil</a>
+            <a href="#ranking">Classement</a>
+            <a href="#about">À propos</a>
+        </nav>
+    </header>
+
+    <!-- Présentation du site -->
+    <section class="hero">
+        <p class="subtitle">PATCH 11.01 • DIAMOND • WORLDWIDE</p>
+
+        <h1>THE ULTIMATE<br><span>TIER LIST</span></h1>
+
+        <p class="description">
+            Découvrez les meilleures légendes de Brawlhalla
+            grâce à un classement basé sur les statistiques compétitives.
+        </p>
+
+        <a href="#ranking" class="main-button">Voir le classement</a>
+    </section>
+
+    <!-- Classement des personnages -->
+    <main id="ranking">
+
+        <div class="section-title">
+
+            <h2>Classement des légendes</h2>
+
+            <p>
+                {{len .Rankings}} personnages classés selon leurs performances.
+            </p>
+
+            <!-- Recherche et filtre par arme -->
+            <div class="filters">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Rechercher un personnage..."
+                >
+
+                <select id="weaponFilter">
+                    <option value="">Toutes les armes</option>
+                </select>
+
+            </div>
+
+            <p id="resultCount" class="result-count"></p>
+
+        </div>
+
+        <div class="legend-grid" id="legendGrid">
+
+            {{range .Rankings}}
+
+            <!-- Carte de la légende avec mise en valeur du Top 3 -->
+            <article class="legend-card
+                {{if eq .Rank 1}}podium-first{{end}}
+                {{if eq .Rank 2}}podium-second{{end}}
+                {{if eq .Rank 3}}podium-third{{end}}">
+
+                <!-- Rang et score global -->
+                <div class="legend-header">
+                    <span class="legend-id">#{{.Rank}}</span>
+
+                    <span class="total-score">
+                        {{printf "%.2f" .TotalScore}} / 100
+                    </span>
+                </div>
+
+                <!-- Nom de la légende -->
+                <h3>{{.Name}}</h3>
+
+                <!-- Armes -->
+                <div class="weapons">
+                    <span>{{.Weapon1}}</span>
+                    <span>{{.Weapon2}}</span>
+                </div>
+
+                <!-- Statistiques réelles -->
+                <div class="legend-stats">
+
+                    <div>
+                        <span>Winrate réel</span>
+                        <strong>{{printf "%.2f" .Stats.Winrate}}%</strong>
+                    </div>
+
+                    <div>
+                        <span>Pickrate réel</span>
+                        <strong>{{printf "%.2f" .Stats.Playrate}}%</strong>
+                    </div>
+
+                    <div>
+                        <span>Parties jouées</span>
+                        <strong>{{.Stats.Games}}</strong>
+                    </div>
+
+                    <div>
+                        <span>Dégâts moyens</span>
+                        <strong>{{printf "%.2f" .Stats.DamageDealt}}</strong>
+                    </div>
+
+                </div>
+<!-- Bouton pour afficher les détails -->
+<button class="details-button" type="button">
+    Voir les détails
+</button>
+
+<!-- Conteneur des informations détaillées -->
+<div class="legend-details" hidden>
+<!-- Performances détaillées des armes -->
+<div class="weapon-performance">
+
+    <h4>Performances des armes</h4>
+
+    <!-- Première arme -->
+    <div class="weapon-detail">
+        <div class="weapon-detail-header">
+            <span>{{.Weapon1}}</span>
+        </div>
+
+        <div class="weapon-detail-stats">
+            <div>
+                <span>Dégâts moyens</span>
+                <strong>{{printf "%.2f" .Stats.DamageWeaponOne}}</strong>
+            </div>
+
+            <div>
+                <span>Temps d'utilisation</span>
+                <strong>{{printf "%.2f" .Stats.MatchTimeWeaponOne}}</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deuxième arme -->
+    <div class="weapon-detail">
+        <div class="weapon-detail-header">
+            <span>{{.Weapon2}}</span>
+        </div>
+
+        <div class="weapon-detail-stats">
+            <div>
+                <span>Dégâts moyens</span>
+                <strong>{{printf "%.2f" .Stats.DamageWeaponTwo}}</strong>
+            </div>
+
+            <div>
+                <span>Temps d'utilisation</span>
+                <strong>{{printf "%.2f" .Stats.MatchTimeWeaponTwo}}</strong>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+                <!-- Scores comparatifs avec barres de progression -->
+                <div class="ranking-scores">
+
+                    <h4>Scores comparatifs</h4>
+
+                    <!-- Score Winrate -->
+                    <div class="score-item">
+                        <div class="score-label">
+                            <span>Winrate</span>
+                            <strong>{{printf "%.2f" .WinrateScore}} / 100</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{printf "%.2f" .WinrateScore}}%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Score Pickrate -->
+                    <div class="score-item">
+                        <div class="score-label">
+                            <span>Pickrate</span>
+                            <strong>{{printf "%.2f" .PlayrateScore}} / 100</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{printf "%.2f" .PlayrateScore}}%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Performance des armes -->
+                    <div class="score-item">
+                        <div class="score-label">
+                            <span>Performance des armes</span>
+                            <strong>{{printf "%.2f" .WeaponPerformanceScore}} / 100</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{printf "%.2f" .WeaponPerformanceScore}}%;"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Statistiques officielles -->
+                <div class="legend-stats official-stats">
+
+                    <div>
+                        <span>Strength</span>
+                        <strong>{{.Strength}}</strong>
+                    </div>
+
+                    <div>
+                        <span>Dexterity</span>
+                        <strong>{{.Dexterity}}</strong>
+                    </div>
+
+                    <div>
+                        <span>Defense</span>
+                        <strong>{{.Defense}}</strong>
+                    </div>
+
+                    <div>
+                        <span>Speed</span>
+                        <strong>{{.Speed}}</strong>
+                    </div>
+
+                </div>
+            </div>
+            
+            </article>
+
+            {{end}}
+
+        </div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer id="about">
+        <p>Brawlhalla Tier List • Projet étudiant 2026</p>
+        <p>Classement calculé à partir des statistiques Brawlmance et des données officielles Brawlhalla.</p>
+    </footer>
+
+    <script src="/static/js/script.js" defer></script>
+
+</body>
+</html>

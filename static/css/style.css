@@ -1,0 +1,500 @@
+
+/* Configuration générale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #10111b;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Barre de navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    background-color: #171925;
+    border-bottom: 1px solid #292c3c;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #f5a623;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #c4c5d0;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #f5a623;
+}
+
+/* Section principale */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #20243c, #11121d);
+}
+
+.subtitle {
+    color: #f5a623;
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 65px;
+    margin: 25px 0;
+    line-height: 1.1;
+}
+
+.hero h1 span {
+    color: #f5a623;
+}
+
+.description {
+    color: #b7b9c8;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+.main-button {
+    display: inline-block;
+    background-color: #f5a623;
+    color: #11121d;
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.main-button:hover {
+    background-color: #ffc45d;
+    transform: translateY(-3px);
+}
+
+/* Section des personnages */
+main {
+    padding: 60px 8%;
+}
+
+.section-title {
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #9295a8;
+}
+
+/* Grille des personnages */
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+/* Carte individuelle */
+.legend-card {
+    background-color: #1c1f2e;
+    border: 1px solid #303447;
+    border-radius: 12px;
+    padding: 22px;
+    transition: 0.3s;
+}
+
+.legend-card:hover {
+    transform: translateY(-5px);
+    border-color: #f5a623;
+}
+
+.legend-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.legend-id {
+    color: #9295a8;
+    font-size: 12px;
+}
+
+.legend-card h3 {
+    font-size: 22px;
+    margin: 15px 0;
+}
+
+/* Armes du personnage */
+.weapons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.weapons span {
+    background-color: #303447;
+    color: #f5a623;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+/* Statistiques du personnage */
+.legend-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.legend-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.legend-stats span {
+    color: #9295a8;
+    font-size: 12px;
+}
+
+.legend-stats strong {
+    font-size: 18px;
+}
+
+/* Pied de page */
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    background-color: #171925;
+    color: #9295a8;
+    font-size: 13px;
+    line-height: 2;
+}
+
+/* Adaptation aux écrans mobiles */
+@media (max-width: 600px) {
+
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    main {
+        padding: 40px 5%;
+    }
+}
+
+/* Barre de recherche et filtres */
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filters input,
+.filters select {
+    background-color: #1c1f2e;
+    color: white;
+    border: 1px solid #303447;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 14px;
+    outline: none;
+}
+
+.filters input {
+    flex: 1;
+    min-width: 0;
+}
+
+.filters select {
+    cursor: pointer;
+}
+
+.filters input:focus,
+.filters select:focus {
+    border-color: #f5a623;
+}
+
+.result-count {
+    color: #9295a8;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+/* Masquage des cartes filtrées */
+.legend-card[hidden] {
+    display: none;
+}
+
+/* Adaptation mobile */
+@media (max-width: 600px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters input,
+    .filters select {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   CLASSEMENT DES LEGENDES
+======================================== */
+
+/* En-tête des cartes */
+.legend-header {
+    align-items: center;
+    gap: 10px;
+}
+
+/* Score global */
+.total-score {
+    color: #f5a623;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Scores comparatifs */
+.ranking-scores {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #303447;
+}
+
+.ranking-scores h4 {
+    color: #f5a623;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* Ligne de chaque critère */
+.ranking-scores div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.ranking-scores span {
+    color: #9295a8;
+    font-size: 12px;
+}
+
+.ranking-scores strong {
+    color: white;
+    font-size: 14px;
+}
+
+/* Séparation des statistiques officielles */
+.official-stats {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #303447;
+}
+/* ========================================
+   PODIUM DU CLASSEMENT
+======================================== */
+
+/* Première place : OR */
+.podium-first {
+    border: 2px solid #f5c542;
+    background: linear-gradient(145deg, #302a1c, #1c1f2e 65%);
+}
+
+.podium-first .legend-id {
+    color: #f5c542;
+    font-weight: bold;
+}
+
+/* Deuxième place : ARGENT */
+.podium-second {
+    border: 2px solid #bfc5d2;
+    background: linear-gradient(145deg, #292d38, #1c1f2e 65%);
+}
+
+.podium-second .legend-id {
+    color: #bfc5d2;
+    font-weight: bold;
+}
+
+/* Troisième place : BRONZE */
+.podium-third {
+    border: 2px solid #cd8752;
+    background: linear-gradient(145deg, #30251f, #1c1f2e 65%);
+}
+
+.podium-third .legend-id {
+    color: #cd8752;
+    font-weight: bold;
+}
+
+/* ========================================
+   BARRES DE PROGRESSION DES SCORES
+======================================== */
+
+.score-item {
+    margin-bottom: 16px;
+}
+
+/* Nom du critère et valeur */
+.score-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.score-label span {
+    color: #9295a8;
+    font-size: 12px;
+}
+
+.score-label strong {
+    color: white;
+    font-size: 12px;
+}
+
+/* Fond de la barre */
+.progress-bar {
+    width: 100%;
+    height: 7px;
+    background-color: #303447;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Progression du score */
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f5a623, #ffcc66);
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* ========================================
+   PERFORMANCES DETAILLEES DES ARMES
+======================================== */
+
+.weapon-performance {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #303447;
+}
+
+.weapon-performance h4 {
+    color: #f5a623;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* Bloc individuel de chaque arme */
+.weapon-detail {
+    background-color: #171a27;
+    border: 1px solid #303447;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.weapon-detail-header {
+    margin-bottom: 12px;
+}
+
+.weapon-detail-header span {
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Statistiques de chaque arme */
+.weapon-detail-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.weapon-detail-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.weapon-detail-stats span {
+    color: #9295a8;
+    font-size: 11px;
+}
+
+.weapon-detail-stats strong {
+    color: white;
+    font-size: 13px;
+}
+
+/* ========================================
+   BOUTON AFFICHER / MASQUER LES DETAILS
+======================================== */
+
+.details-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 11px;
+    background-color: #292d40;
+    border: 1px solid #f5a623;
+    border-radius: 8px;
+    color: #f5a623;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-button:hover {
+    background-color: #f5a623;
+    color: #10111b;
+}
+
+/* Conteneur des détails */
+.legend-details {
+    margin-top: 5px;
+}
+
+/* Respect du masquage des détails */
+.legend-details[hidden] {
+    display: none;
+}

@@ -1,0 +1,14 @@
+# Fichiers macOS
+.DS_Store
+
+# Fichiers sensibles
+.env
+.env.*
+
+# Fichiers générés par Go
+*.exe
+*.test
+*.out
+
+# Fichiers exécutables compilés
+/brawlhalla-tierlist
